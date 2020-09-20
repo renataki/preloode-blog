@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="app" ng-controller="global">
+<head th:replace="global/header :: head"></head>
+<base th:replace="global/header :: global"/>
+<audio th:replace="global/header :: notification"></audio>
+<div id="wrapper" ng-controller="shopCategory">
+    <div th:replace="global/header :: loading"></div>
+    <div th:replace="global/header :: response"></div>
+    <div th:replace="global/header :: menuIcon"></div>
+    <div th:replace="global/header :: menu"></div>
+    <div th:replace="global/header :: header"></div>
+    <div id="content" th:ng-init="${'initializeData(''' + entry.id + ''')'}">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="breadcrumb">
+                    <p>
+                        <a th:href="${global.setting.url.base + '/'}">Home</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/shop/'}">Shop</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/shop/category/'}">Category</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>Entry</p>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <form method="POST" action="">
+                <div class="accordion">
+                    <p class="accordion-navigation" data-index="1">
+                        Detail<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="1">
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Name </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-name" type="text" placeholder="Name" ng-keyup="checkName()" ng-model="name.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="name.response.view" ng-class="name.response.class">
+                                {{name.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Parent </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkParent()" ng-model="parent.selected" placeholder="Parent">
+                                    <md-option ng-repeat="data in parent.option" ng-value="data">
+                                        <span ng-bind-html="data.icon + data.name"></span>
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="parent.response.view" ng-class="parent.response.class">
+                                {{parent.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea id="tinymce-1" name="shop-category-description" placeholder="Description" th:text="${entry.description}"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="description.response.view" ng-class="description.response.class">
+                                {{description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Content </p>
+                        </div>
+                        <div class="data">
+                            <textarea id="tinymce-2" name="shop-category-content" placeholder="Content" th:text="${entry.content}"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="content.response.view" ng-class="content.response.class">
+                                {{content.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>URL </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-url" type="text" placeholder="URL" ng-keyup="checkUrl()" ng-model="url.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="url.response.view" ng-class="url.response.class">
+                                {{url.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Title </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-meta-title" type="text" placeholder="Meta Title" ng-model="meta.title.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.title.response.view" ng-class="meta.title.response.class">
+                                {{meta.title.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea name="shop-category-meta-description" placeholder="Meta Description" ng-model="meta.description.value"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.description.response.view" ng-class="meta.description.response.class">
+                                {{meta.description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Keyword </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-meta-keyword" type="text" placeholder="Meta Keyword" ng-model="meta.keyword.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.keyword.response.view" ng-class="meta.keyword.response.class">
+                                {{meta.keyword.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>OG Title </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-og-title" type="text" placeholder="OG Title" ng-model="og.title.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="og.title.response.view" ng-class="og.title.response.class">
+                                {{og.title.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>OG Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea name="shop-category-og-description" placeholder="OG Description" ng-model="og.description.value"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="og.description.response.view" ng-class="og.description.response.class">
+                                {{og.description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>View </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-view" type="text" placeholder="View" ng-keyup="checkView()" ng-model="view.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="view.response.view" ng-class="view.response.class">
+                                {{view.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Rate </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-rate" type="text" placeholder="Rate" ng-keyup="checkRate()" ng-model="rate.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="rate.response.view" ng-class="rate.response.class">
+                                {{rate.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Like </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-like" type="text" placeholder="Like" ng-keyup="checkLike()" ng-model="like.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="like.response.view" ng-class="like.response.class">
+                                {{like.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Dislike </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-dislike" type="text" placeholder="Dislike" ng-keyup="checkDislike()" ng-model="dislike.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="dislike.response.view" ng-class="dislike.response.class">
+                                {{dislike.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Sequence </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-category-sequence" type="text" placeholder="Sequence" ng-keyup="checkSequence()" ng-model="sequence.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="sequence.response.view" ng-class="sequence.response.class">
+                                {{sequence.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Status </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkStatus()" ng-model="status.selected" placeholder="Status">
+                                    <md-option ng-repeat="data in status.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="status.response.view" ng-class="status.response.class">
+                                {{status.response.value}} </p>
+                        </div>
+                        <div class="title" ng-show="created.timestamp.view">
+                            <p>
+                                <span class="required"></span>Created Date </p>
+                        </div>
+                        <div class="data" ng-show="created.timestamp.view">
+                            <input name="shop-category-created-date" type="text" placeholder="Created Date" readonly ng-model="created.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="created.timestamp.view"></div>
+                        <div class="title" ng-show="modified.timestamp.view">
+                            <p>
+                                <span class="required"></span>Modified Date </p>
+                        </div>
+                        <div class="data" ng-show="modified.timestamp.view">
+                            <input name="shop-category-modified-date" type="text" placeholder="Modified Date" readonly ng-model="modified.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="modified.timestamp.view"></div>
+                    </div>
+                    <p class="accordion-navigation" data-index="2">
+                        File<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="2">
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Thumbnail </p>
+                        </div>
+                        <div class="data">
+                            <input class="shop-category-thumbnail-list" name="shop-category-thumbnail-list" type="file" thumbnail-list-input="files" multiple/>
+                            <div class="file-list" ng-show="thumbnailList.upload.view">
+                                <shop-category-thumbnail-list-preview></shop-category-thumbnail-list-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadThumbnailList()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="thumbnailList.response.view" ng-class="thumbnailList.response.class">
+                                {{thumbnailList.response.value}} </p>
+                        </div>
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Image </p>
+                        </div>
+                        <div class="data">
+                            <input class="shop-category-image-list" name="shop-category-image-list" type="file" image-list-input="files" multiple/>
+                            <div class="file-list" ng-show="imageList.upload.view">
+                                <shop-category-image-list-preview></shop-category-image-list-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadImageList()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="imageList.response.view" ng-class="imageList.response.class">
+                                {{imageList.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="3">
+                        Company<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="3">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.idList.value.length == company.option.length" md-indeterminate="company.idList.value.length > company.option.length && company.idList.value.length > 0" ng-click="companyToggleAllCheckbox()">
+                                    <span ng-if="company.idList.value.length < company.option.length">Select All</span>
+                                    <span ng-if="company.idList.value.length == company.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.option">
+                                <md-checkbox ng-checked="company.idList.value.indexOf(data.id) > -1" ng-click="companyToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.response.view" ng-class="company.response.class">
+                                {{company.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="4">
+                        Branch<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="4">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.branch.idList.value.length == company.branch.option.length" md-indeterminate="company.branch.idList.value.length > company.branch.option.length && company.branch.idList.value.length > 0" ng-click="companyBranchToggleAllCheckbox()">
+                                    <span ng-if="company.branch.idList.value.length < company.branch.option.length">Select All</span>
+                                    <span ng-if="company.branch.idList.value.length == company.branch.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.branch.option">
+                                <md-checkbox ng-checked="company.branch.idList.value.indexOf(data.id) > -1" ng-click="companyBranchToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.branch.response.view" ng-class="company.branch.response.class">
+                                {{company.branch.response.value}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button th:if="${not #strings.isEmpty(entry.id)}" class="yellow" name="shop-category-edit" ng-click="edit($event)">
+                        <i class="pencil-white square-15 margin-right-5"></i>Edit
+                    </button>
+                    <button th:if="${#strings.isEmpty(entry.id)}" class="green" name="shop-category-insert" ng-click="insert($event)">
+                        <i class="plus-white square-15 margin-right-5"></i>Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div th:replace="global/footer :: footer"></div>
+</div>
+</body>
+</html>

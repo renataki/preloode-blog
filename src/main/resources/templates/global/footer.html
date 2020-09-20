@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="footer" id="footer">
+    <p>Copyright &copy;[[${#dates.format(#dates.createNow(), 'yyyy')}]] <a href="http://www.preloode.com/">Preloode</a>
+        All Right Reserved </p>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular-animate.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular-aria.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular-material.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular-sanitize.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/angular-js/angular-scrollbar.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/jquery/jquery.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/stomp.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/jsencrypt.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/owl-carousel.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/flatpicker.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/d3-v5.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/library/library.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.plugin + '/tinymce/tinymce.min.js'}"></script>
+    <script type="text/javascript" th:src="${global.setting.url.javascript + '/global.js'}"></script>
+    <script th:each="javascript : ${global.setting.javascript}" type="text/javascript" th:src="${global.setting.url.javascript + '/' + javascript}"></script>
+</div>
+</html>

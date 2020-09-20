@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="app" ng-controller="global">
+<head th:replace="global/header :: head"></head>
+<base th:replace="global/header :: global"/>
+<audio th:replace="global/header :: notification"></audio>
+<div id="wrapper" ng-controller="shopProduct">
+    <div th:replace="global/header :: loading"></div>
+    <div th:replace="global/header :: response"></div>
+    <div th:replace="global/header :: menuIcon"></div>
+    <div th:replace="global/header :: menu"></div>
+    <div th:replace="global/header :: header"></div>
+    <div id="content" th:ng-init="${'initializeData(''' + entry.id + ''')'}">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="breadcrumb">
+                    <p>
+                        <a th:href="${global.setting.url.base + '/'}">Home</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/shop/'}">Shop</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/shop/product/'}">Product</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>Entry</p>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <form method="POST" action="">
+                <div class="accordion">
+                    <p class="accordion-navigation" data-index="1">
+                        Detail<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="1">
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Name </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-name" type="text" placeholder="Name" ng-keyup="checkName()" ng-model="name.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="name.response.view" ng-class="name.response.class">
+                                {{name.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Type </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkType()" ng-model="type.selected" placeholder="Type">
+                                    <md-option ng-repeat="data in type.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="type.response.view" ng-class="type.response.class">
+                                {{type.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Brand </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkBrand()" ng-model="brand.selected" placeholder="Brand">
+                                    <md-option ng-repeat="data in brand.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="brand.response.view" ng-class="brand.response.class">
+                                {{brand.response.value}}</p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>SKU </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-sku" type="text" placeholder="SKU" ng-keyup="checkSku()" ng-model="sku.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="sku.response.view" ng-class="sku.response.class">
+                                {{sku.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p><span class="required"></span>Storage</p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="storage.value" aria-label="Storage" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{storage.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title" ng-show="storage.value">
+                            <p>
+                                <span class="required">* </span>Stock </p>
+                        </div>
+                        <div class="data" ng-show="storage.value">
+                            <input name="shop-product-stock" type="text" placeholder="Stock" ng-keyup="checkStock()" ng-model="stock.value"/>
+                        </div>
+                        <div class="response" ng-show="storage.value">
+                            <p ng-show="stock.response.view" ng-class="stock.response.class">
+                                {{stock.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p><span class="required"></span>Recurring</p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="recurring.value" aria-label="Recurring" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{recurring.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title" ng-show="!recurring.value">
+                            <p>
+                                <span class="required">* </span>Price </p>
+                        </div>
+                        <div class="data" ng-show="!recurring.value">
+                            <input name="shop-product-price-one-time-normal" type="text" placeholder="Price" ng-keyup="checkPriceOneTimeNormal()" ng-model="price.oneTime.normal.value"/>
+                        </div>
+                        <div class="response" ng-show="!recurring.value">
+                            <p ng-show="price.oneTime.normal.response.view" ng-class="price.oneTime.normal.response.class">
+                                {{price.oneTime.normal.response.value}} </p>
+                        </div>
+                        <div class="title" ng-show="!recurring.value">
+                            <p>
+                                <span class="required"></span>Discount Price </p>
+                        </div>
+                        <div class="data" ng-show="!recurring.value">
+                            <input name="shop-product-price-one-time-discount" type="text" placeholder="Discount Price" ng-keyup="checkPriceOneTimeDiscount()" ng-model="price.oneTime.discount.value"/>
+                        </div>
+                        <div class="response" ng-show="!recurring.value">
+                            <p ng-show="price.oneTime.discount.response.view" ng-class="price.oneTime.discount.response.class">
+                                {{price.oneTime.discount.response.value}} </p>
+                        </div>
+                        <div class="data-multiple" ng-show="recurring.value">
+                            <div class="item" ng-repeat="(iteration, data) in recurring.timeFrame">
+                                <div class="title">
+                                    <p>
+                                        <span class="required">* </span>Price {{data.name}}</p>
+                                </div>
+                                <div class="data">
+                                    <input name="shop-product-price-recurring-normal" type="text" placeholder="Price" ng-keyup="checkPriceRecurringNormalList()" ng-model="price.recurring.normalList.value[iteration]"/>
+                                </div>
+                                <div class="title">
+                                    <p>
+                                        <span class="required"></span>Discount Price {{data.name}} </p>
+                                </div>
+                                <div class="data">
+                                    <input name="shop-product-price-recurring-discount" type="text" placeholder="Discount Price" ng-keyup="checkPriceRecurringDiscountList()" ng-model="price.recurring.discountList.value[iteration]"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="response" ng-show="recurring.value">
+                            <p ng-show="price.recurring.normal.response.view" ng-class="price.recurring.normal.response.class">
+                                {{price.recurring.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea id="tinymce-1" name="shop-product-description" placeholder="Description" th:text="${entry.description}"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="description.response.view" ng-class="description.response.class">
+                                {{description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Tag </p>
+                        </div>
+                        <div class="data">
+                            <md-chips ng-model="tagList.value" md-transform-chip="$chip">
+                                <md-chip-template>
+                                    <span>{{$chip}}</span>
+                                </md-chip-template>
+                            </md-chips>
+                        </div>
+                        <div class="response">
+                            <p ng-show="tag.response.view" ng-class="tag.response.class">
+                                {{tag.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Information </p>
+                        </div>
+                        <div class="data">
+                            <textarea id="tinymce-2" name="shop-product-information" placeholder="Information" th:text="${entry.information}"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="information.response.view" ng-class="information.response.class">
+                                {{information.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Guide </p>
+                        </div>
+                        <div class="data">
+                            <textarea id="tinymce-3" name="shop-product-guide" placeholder="Guide" th:text="${entry.guide}"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="guide.response.view" ng-class="guide.response.class">
+                                {{guide.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>URL </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-url" type="text" placeholder="URL" ng-keyup="checkUrl()" ng-model="url.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="url.response.view" ng-class="url.response.class">
+                                {{url.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Title </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-meta-title" type="text" placeholder="Meta Title" ng-model="meta.title.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.title.response.view" ng-class="meta.title.response.class">
+                                {{meta.title.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea name="shop-product-meta-description" placeholder="Meta Description" ng-model="meta.description.value"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.description.response.view" ng-class="meta.description.response.class">
+                                {{meta.description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Meta Keyword </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-meta-keyword" type="text" placeholder="Meta Keyword" ng-model="meta.keyword.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="meta.keyword.response.view" ng-class="meta.keyword.response.class">
+                                {{meta.keyword.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>OG Title </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-og-title" type="text" placeholder="OG Title" ng-model="og.title.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="og.title.response.view" ng-class="og.title.response.class">
+                                {{og.title.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>OG Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea name="shop-product-og-description" placeholder="OG Description" ng-model="og.description.value"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="og.description.response.view" ng-class="og.description.response.class">
+                                {{og.description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>View </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-view" type="text" placeholder="View" ng-keyup="checkView()" ng-model="view.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="view.response.view" ng-class="view.response.class">
+                                {{view.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Rate </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-rate" type="text" placeholder="Rate" ng-keyup="checkRate()" ng-model="rate.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="rate.response.view" ng-class="rate.response.class">
+                                {{rate.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Like </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-like" type="text" placeholder="Like" ng-keyup="checkLike()" ng-model="like.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="like.response.view" ng-class="like.response.class">
+                                {{like.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Dislike </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-dislike" type="text" placeholder="Dislike" ng-keyup="checkDislike()" ng-model="dislike.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="dislike.response.view" ng-class="dislike.response.class">
+                                {{dislike.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Sequence </p>
+                        </div>
+                        <div class="data">
+                            <input name="shop-product-sequence" type="text" placeholder="Sequence" ng-keyup="checkSequence()" ng-model="sequence.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="sequence.response.view" ng-class="sequence.response.class">
+                                {{sequence.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p><span class="required"></span>Featured</p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="featured.value" aria-label="Featured" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{featured.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Status </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkStatus()" ng-model="status.selected" placeholder="Status">
+                                    <md-option ng-repeat="data in status.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="status.response.view" ng-class="status.response.class">
+                                {{status.response.value}} </p>
+                        </div>
+                        <div class="title" ng-show="created.timestamp.view">
+                            <p>
+                                <span class="required"></span>Created Date </p>
+                        </div>
+                        <div class="data" ng-show="created.timestamp.view">
+                            <input name="shop-product-created-date" type="text" placeholder="Created Date" readonly ng-model="created.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="created.timestamp.view"></div>
+                        <div class="title" ng-show="modified.timestamp.view">
+                            <p>
+                                <span class="required"></span>Modified Date </p>
+                        </div>
+                        <div class="data" ng-show="modified.timestamp.view">
+                            <input name="shop-product-modified-date" type="text" placeholder="Modified Date" readonly ng-model="modified.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="modified.timestamp.view"></div>
+                    </div>
+                    <p class="accordion-navigation" data-index="2">
+                        File<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="2">
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Thumbnail </p>
+                        </div>
+                        <div class="data">
+                            <input class="shop-product-thumbnail-list" name="shop-product-thumbnail-list" type="file" thumbnail-list-input="files" multiple/>
+                            <div class="file-list" ng-show="thumbnailList.upload.view">
+                                <shop-product-thumbnail-list-preview></shop-product-thumbnail-list-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadThumbnailList()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="thumbnailList.response.view" ng-class="thumbnailList.response.class">
+                                {{thumbnailList.response.value}} </p>
+                        </div>
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Image </p>
+                        </div>
+                        <div class="data">
+                            <input class="shop-product-image-list" name="shop-product-image-list" type="file" image-list-input="files" multiple/>
+                            <div class="file-list" ng-show="imageList.upload.view">
+                                <shop-product-image-list-preview></shop-product-image-list-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadImageList()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="imageList.response.view" ng-class="imageList.response.class">
+                                {{imageList.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="3">
+                        Category<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="3">
+                        <div class="checkbox-list">
+                            <div ng-repeat="data in category.option">
+                                <p ng-bind-html="data.icon"></p>
+                                <md-checkbox ng-checked="category.idList.value.indexOf(data.id) > -1" ng-click="categoryToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="category.response.view" ng-class="category.response.class">
+                                {{category.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="4">
+                        Company<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="4">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.idList.value.length == company.option.length" md-indeterminate="company.idList.value.length > company.option.length && company.idList.value.length > 0" ng-click="companyToggleAllCheckbox()">
+                                    <span ng-if="company.idList.value.length < company.option.length">Select All</span>
+                                    <span ng-if="company.idList.value.length == company.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.option">
+                                <md-checkbox ng-checked="company.idList.value.indexOf(data.id) > -1" ng-click="companyToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.response.view" ng-class="company.response.class">
+                                {{company.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="5">
+                        Branch<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="5">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.branch.idList.value.length == company.branch.option.length" md-indeterminate="company.branch.idList.value.length > company.branch.option.length && company.branch.idList.value.length > 0" ng-click="companyBranchToggleAllCheckbox()">
+                                    <span ng-if="company.branch.idList.value.length < company.branch.option.length">Select All</span>
+                                    <span ng-if="company.branch.idList.value.length == company.branch.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.branch.option">
+                                <md-checkbox ng-checked="company.branch.idList.value.indexOf(data.id) > -1" ng-click="companyBranchToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.branch.response.view" ng-class="company.branch.response.class">
+                                {{company.branch.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="6">
+                        Variant<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="6">
+                        <div class="input-list">
+                            <div class="list-multiple" ng-repeat="(iteration, data) in variant.index">
+                                <div class="detail">
+                                    <div class="title">
+                                        <p>
+                                            <span class="required">* </span>Name </p>
+                                    </div>
+                                </div>
+                                <div class="data">
+                                    <input name="shop-product-variant-name-list" type="text" placeholder="Name" ng-keyup="checkVariantNameList()" ng-model="variant.nameList.value[iteration]"/>
+                                </div>
+                                <div class="detail">
+                                    <div class="title">
+                                        <p>
+                                            <span class="required"></span>SKU </p>
+                                    </div>
+                                </div>
+                                <div class="data">
+                                    <input name="shop-product-variant-sku-list" type="text" placeholder="SKU" ng-keyup="checkVariantSkuList()" ng-model="variant.skuList.value[iteration]"/>
+                                </div>
+                                <div class="detail" ng-show="storage.value">
+                                    <div class="title">
+                                        <p>
+                                            <span class="required">* </span>Stock </p>
+                                    </div>
+                                </div>
+                                <div class="data" ng-show="storage.value">
+                                    <input name="shop-product-variant-stock-list" type="text" placeholder="Stock" ng-keyup="checkVariantStockList()" ng-model="variant.stockList.value[iteration]"/>
+                                </div>
+                                <div class="detail" ng-show="!recurring.value">
+                                    <div class="title">
+                                        <p>
+                                            <span class="required">* </span>Price </p>
+                                    </div>
+                                </div>
+                                <div class="data" ng-show="!recurring.value">
+                                    <input name="shop-product-variant-price-one-time-normal-list" type="text" placeholder="Price" ng-keyup="checkVariantPriceOneTimeNormalList()" ng-model="variant.price.oneTime.normalList.value[iteration]"/>
+                                </div>
+                                <div class="detail" ng-show="!recurring.value">
+                                    <div class="title">
+                                        <p>
+                                            <span class="required"></span>Discount Price </p>
+                                    </div>
+                                </div>
+                                <div class="data" ng-show="!recurring.value">
+                                    <input name="shop-product-variant-price-one-time-discount-list" type="text" placeholder="Discount Price" ng-keyup="checkVariantPriceOneTimeDiscountList()" ng-model="variant.price.oneTime.discountList.value[iteration]"/>
+                                </div>
+                                <div class="data-multiple" ng-show="recurring.value">
+                                    <div class="item" ng-repeat="(iterationChild1, dataChild1) in recurring.timeFrame">
+                                        <div class="title">
+                                            <p>
+                                                <span class="required">* </span>Price {{dataChild1.name}} </p>
+                                        </div>
+                                        <div class="data">
+                                            <input name="shop-product-variant-price-recurring-normal-list" type="text" placeholder="Price" ng-keyup="checkVariantPriceRecurringNormalList()" ng-model="variant.price.recurring.normalList.value[iteration][iterationChild1]"/>
+                                        </div>
+                                        <div class="title">
+                                            <p>
+                                                <span class="required"></span>Discount Price
+                                                {{dataChild1.name}}</p>
+                                        </div>
+                                        <div class="data">
+                                            <input name="shop-product-price-variant-recurring-discount-list" type="text" placeholder="Discount Price" ng-keyup="checkVariantPriceRecurringDiscountList()" ng-model="variant.price.recurring.discountList.value[iteration][iterationChild1]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <button class="red" name="delete" ng-click="deleteVariant(iteration, $event)">
+                                        <i class="trash-white square-15"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="variant.response.view" ng-class="variant.response.class">
+                                {{variant.response.value}}</p>
+                        </div>
+                        <div class="add-input">
+                            <button class="green" name="shop-product-add-variant" ng-click="insertVariant($event)">
+                                <i class="plus-white square-15 margin-right-5"></i>Add Variant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button th:if="${not #strings.isEmpty(entry.id)}" class="yellow" name="shop-product-edit" ng-click="edit($event)">
+                        <i class="pencil-white square-15 margin-right-5"></i>Edit
+                    </button>
+                    <button th:if="${#strings.isEmpty(entry.id)}" class="green" name="shop-product-insert" ng-click="insert($event)">
+                        <i class="plus-white square-15 margin-right-5"></i>Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div th:replace="global/footer :: footer"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="app" ng-controller="global">
+<head th:replace="global/header :: head"></head>
+<base th:replace="global/header :: global"/>
+<audio th:replace="global/header :: notification"></audio>
+<div id="wrapper" ng-controller="login">
+    <div th:replace="global/header :: loading"></div>
+    <div th:replace="global/header :: response"></div>
+    <div class="login">
+        <div class="back" ng-click="backward()">
+            <i class="back-white square-30 back" ng-show="password.view"></i>
+        </div>
+        <div class="picture">
+            <img class="responsive user" ng-src="{{account.avatar}}" th:alt="${global.setting.name + ' User Avatar'}">
+        </div>
+        <div class="name">{{account.name}}</div>
+        <form method="POST" action="">
+            <div class="animation-input">
+                <input class="username" name="preloode-login-username" type="text" placeholder="Username" autocomplete="on" ng-show="username.view" ng-keypress="checkUsername($event)" ng-model="username.value">
+                <input class="password" name="preloode-login-password" type="password" placeholder="Password" autocomplete="on" ng-show="password.view" ng-keypress="checkPassword($event)" ng-model="password.value">
+            </div>
+            <div class="animation-button">
+                <button class="next" name="next" type="button" ng-show="username.view" ng-click="checkUsername($event)">
+                    Next
+                </button>
+                <button class="login" name="login" type="submit" ng-show="password.view" ng-click="checkPassword($event)">
+                    Sign In
+                </button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="global/footer :: footer"></div>
+</div>
+</body>
+</html>

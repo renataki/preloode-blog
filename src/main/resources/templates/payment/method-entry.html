@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="app" ng-controller="global">
+<head th:replace="global/header :: head"></head>
+<base th:replace="global/header :: global"/>
+<audio th:replace="global/header :: notification"></audio>
+<div id="wrapper" ng-controller="paymentMethod">
+    <div th:replace="global/header :: loading"></div>
+    <div th:replace="global/header :: response"></div>
+    <div th:replace="global/header :: menuIcon"></div>
+    <div th:replace="global/header :: menu"></div>
+    <div th:replace="global/header :: header"></div>
+    <div id="content" th:ng-init="${'initializeData(''' + entry.id + ''')'}">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="breadcrumb">
+                    <p>
+                        <a th:href="${global.setting.url.base + '/'}">Home</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/payment/'}">Payment</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>
+                        <a th:href="${global.setting.url.base + '/payment/method/'}">Method</a>
+                        <i class="next-white square-10 margin-left-5"></i>
+                    </p>
+                    <p>Entry</p>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <form method="POST" action="">
+                <div class="accordion">
+                    <p class="accordion-navigation" data-index="1">
+                        Detail<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="1">
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Name </p>
+                        </div>
+                        <div class="data">
+                            <input name="payment-method-name" type="text" placeholder="Name" ng-keyup="checkName()" ng-model="name.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="name.response.view" ng-class="name.response.class">
+                                {{name.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Type </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkType()" ng-model="type.selected" placeholder="Type">
+                                    <md-option ng-repeat="data in type.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="type.response.view" ng-class="type.response.class">
+                                {{type.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Description </p>
+                        </div>
+                        <div class="data">
+                            <textarea name="payment-method-description" placeholder="Description" ng-keyup="checkDescription()" ng-model="description.value"></textarea>
+                        </div>
+                        <div class="response">
+                            <p ng-show="description.response.view" ng-class="description.response.class">
+                                {{description.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Sequence </p>
+                        </div>
+                        <div class="data">
+                            <input name="payment-method-sequence" type="text" placeholder="Sequence" ng-keyup="checkSequence()" ng-model="sequence.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="sequence.response.view" ng-class="sequence.response.class">
+                                {{sequence.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required">* </span>Status </p>
+                        </div>
+                        <div class="data">
+                            <md-input-container>
+                                <md-select ng-change="checkStatus()" ng-model="status.selected" placeholder="Status">
+                                    <md-option ng-repeat="data in status.option" ng-value="data">
+                                        {{data.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="response">
+                            <p ng-show="status.response.view" ng-class="status.response.class">
+                                {{status.response.value}} </p>
+                        </div>
+                        <div class="title" ng-show="created.timestamp.view">
+                            <p>
+                                <span class="required"></span>Created Date </p>
+                        </div>
+                        <div class="data" ng-show="created.timestamp.view">
+                            <input name="payment-method-created-date" type="text" placeholder="Created Date" readonly ng-model="created.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="created.timestamp.view"></div>
+                        <div class="title" ng-show="modified.timestamp.view">
+                            <p>
+                                <span class="required"></span>Modified Date </p>
+                        </div>
+                        <div class="data" ng-show="modified.timestamp.view">
+                            <input name="payment-method-modified-date" type="text" placeholder="Modified Date" readonly ng-model="modified.timestamp.value"/>
+                        </div>
+                        <div class="response" ng-show="modified.timestamp.view"></div>
+                    </div>
+                    <p class="accordion-navigation" data-index="2">
+                        Fee<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="2">
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Provider Fix </p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="fee.providerFix.value" aria-label="Provider Fix" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{fee.providerFix.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Provider </p>
+                        </div>
+                        <div class="data">
+                            <input name="payment-method-fee-provider" type="text" placeholder="Provider" ng-keyup="checkFeeProvider()" ng-model="fee.provider.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="fee.provider.response.view" ng-class="fee.provider.response.class">
+                                {{fee.provider.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Service Fix </p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="fee.serviceFix.value" aria-label="Service Fix" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{fee.serviceFix.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Service </p>
+                        </div>
+                        <div class="data">
+                            <input name="payment-method-fee-service" type="text" placeholder="Service" ng-keyup="checkFeeService()" ng-model="fee.service.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="fee.service.response.view" ng-class="fee.service.response.class">
+                                {{fee.service.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="3">
+                        Display<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="3">
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>On Footer </p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="footer.display.value" aria-label="On Footer" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{footer.display.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>On Sidebar </p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="sidebar.display.value" aria-label="On Sidebar" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{sidebar.display.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>On Payment </p>
+                        </div>
+                        <div class="data">
+                            <md-switch ng-change="initializeSwitch()" ng-model="payment.display.value" aria-label="On Payment" ng-true-value="true" ng-false-value="false" class="md-warn">
+                                {{payment.display.name}}
+                            </md-switch>
+                        </div>
+                        <div class="response"></div>
+                    </div>
+                    <p class="accordion-navigation" data-index="4">
+                        File<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="4">
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Footer Logo </p>
+                        </div>
+                        <div class="data">
+                            <input class="payment-method-footer-logo" name="payment-method-footer-logo" type="file" footer-logo-input="files"/>
+                            <div class="file-list" ng-show="footer.logo.upload.view">
+                                <payment-method-footer-logo-preview></payment-method-footer-logo-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadFooterLogo()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="footer.logo.response.view" ng-class="footer.logo.response.class">
+                                {{footer.logo.response.value}} </p>
+                        </div>
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Sidebar Logo </p>
+                        </div>
+                        <div class="data">
+                            <input class="payment-method-sidebar-logo" name="payment-method-sidebar-logo" type="file" sidebar-logo-input="files"/>
+                            <div class="file-list" ng-show="sidebar.logo.upload.view">
+                                <payment-method-sidebar-logo-preview></payment-method-sidebar-logo-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadSidebarLogo()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="sidebar.logo.response.view" ng-class="sidebar.logo.response.class">
+                                {{sidebar.logo.response.value}} </p>
+                        </div>
+                        <div class="title file">
+                            <p>
+                                <span class="required"></span>Payment Logo </p>
+                        </div>
+                        <div class="data">
+                            <input class="payment-method-payment-logo" name="payment-method-payment-logo" type="file" payment-logo-input="files"/>
+                            <div class="file-list" ng-show="payment.logo.upload.view">
+                                <payment-method-payment-logo-preview></payment-method-payment-logo-preview>
+                            </div>
+                            <div class="upload-file" ng-click="forceUploadPaymentLogo()">
+                                <i class="cloud-white square-15 margin-right-5"></i>Upload
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-show="payment.logo.response.view" ng-class="payment.logo.response.class">
+                                {{payment.logo.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="5">
+                        Business Hour<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content data-entry" data-index="5">
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Monday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-monday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourMonday()" ng-model="businessHour.monday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-monday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourMonday()" ng-model="businessHour.monday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.monday.response.view" ng-class="businessHour.monday.response.class">
+                                {{businessHour.monday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Tuesday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-tuesday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourTuesday()" ng-model="businessHour.tuesday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-tuesday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourTuesday()" ng-model="businessHour.tuesday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.tuesday.response.view" ng-class="businessHour.tuesday.response.class">
+                                {{businessHour.tuesday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Wednesday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-wednesday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourWednesday()" ng-model="businessHour.wednesday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-wednesday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourWednesday()" ng-model="businessHour.wednesday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.wednesday.response.view" ng-class="businessHour.wednesday.response.class">
+                                {{businessHour.wednesday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Thursday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-thursday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourThursday()" ng-model="businessHour.thursday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-thursday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourThursday()" ng-model="businessHour.thursday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.thursday.response.view" ng-class="businessHour.thursday.response.class">
+                                {{businessHour.thursday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Friday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-friday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourFriday()" ng-model="businessHour.friday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-friday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourFriday()" ng-model="businessHour.friday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.friday.response.view" ng-class="businessHour.friday.response.class">
+                                {{businessHour.friday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Saturday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-saturday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourSaturday()" ng-model="businessHour.saturday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-saturday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourSaturday()" ng-model="businessHour.saturday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.saturday.response.view" ng-class="businessHour.saturday.response.class">
+                                {{businessHour.saturday.response.value}} </p>
+                        </div>
+                        <div class="title">
+                            <p>
+                                <span class="required"></span>Sunday </p>
+                        </div>
+                        <div class="data-range">
+                            <input class="time-picker" name="payment-method-business-hour-sunday-start" type="text" placeholder="Time Start" ng-keyup="checkBusinessHourSunday()" ng-model="businessHour.sunday.start.value"/>
+                            <input class="time-picker" name="payment-method-business-hour-sunday-end" type="text" placeholder="Time End" ng-keyup="checkBusinessHourSunday()" ng-model="businessHour.sunday.end.value"/>
+                        </div>
+                        <div class="response">
+                            <p ng-show="businessHour.sunday.response.view" ng-class="businessHour.sunday.response.class">
+                                {{businessHour.sunday.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="6">
+                        Company<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="6">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.idList.value.length == company.option.length" md-indeterminate="company.idList.value.length > company.option.length && company.idList.value.length > 0" ng-click="companyToggleAllCheckbox()">
+                                    <span ng-if="company.idList.value.length < company.option.length">Select All</span>
+                                    <span ng-if="company.idList.value.length == company.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.option">
+                                <md-checkbox ng-checked="company.idList.value.indexOf(data.id) > -1" ng-click="companyToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.response.view" ng-class="company.response.class">
+                                {{company.response.value}} </p>
+                        </div>
+                    </div>
+                    <p class="accordion-navigation" data-index="7">
+                        Branch<span><i class="plus-white square-10"></i></span>
+                    </p>
+                    <div class="accordion-content list-entry" data-index="7">
+                        <div class="checkbox-list">
+                            <div>
+                                <md-checkbox aria-label="Select All" ng-checked="company.branch.idList.value.length == company.branch.option.length" md-indeterminate="company.branch.idList.value.length > company.branch.option.length && company.branch.idList.value.length > 0" ng-click="companyBranchToggleAllCheckbox()">
+                                    <span ng-if="company.branch.idList.value.length < company.branch.option.length">Select All</span>
+                                    <span ng-if="company.branch.idList.value.length == company.branch.option.length">Unselect All</span>
+                                </md-checkbox>
+                            </div>
+                            <div ng-repeat="data in company.branch.option">
+                                <md-checkbox ng-checked="company.branch.idList.value.indexOf(data.id) > -1" ng-click="companyBranchToggleCheckbox(data)">
+                                    {{data.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                        <div class="response">
+                            <p ng-if="company.branch.response.view" ng-class="company.branch.response.class">
+                                {{company.branch.response.value}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button th:if="${not #strings.isEmpty(entry.id)}" class="yellow" name="payment-method-edit" ng-click="edit($event)">
+                        <i class="pencil-white square-15 margin-right-5"></i>Edit
+                    </button>
+                    <button th:if="${#strings.isEmpty(entry.id)}" class="green" name="payment-method-insert" ng-click="insert($event)">
+                        <i class="plus-white square-15 margin-right-5"></i>Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div th:replace="global/footer :: footer"></div>
+</div>
+</body>
+</html>

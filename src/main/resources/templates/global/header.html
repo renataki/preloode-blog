@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="language" content="english"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:if="${#strings.isEmpty(global.setting.meta.title) || global.setting.meta.title == 'Index'}" th:text="${global.setting.name}"></title>
+    <title th:if="${not #strings.isEmpty(global.setting.meta.title) || global.setting.meta.title != 'Index'}" th:text="${global.setting.meta.title + ' | ' + global.setting.name}"></title>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.description)}" name="description" th:content="${global.setting.meta.description}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.keyword)}" name="keyword" th:content="${global.setting.meta.keyword}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.categories)}" name="categories" th:content="${global.setting.meta.categories}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.language)}" name="language" th:content="${global.setting.meta.language}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.themeColor)}" name="theme-color" th:content="${global.setting.meta.themeColor}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.robots)}" name="robots" th:content="${global.setting.meta.robots}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.geo.region)}" name="geo.region" th:content="${global.setting.meta.geo.region}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.geo.placename)}" name="geo.placename" th:content="${global.setting.meta.geo.placename}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.locale)}" property="og:locale" th:content="${global.setting.meta.og.locale}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.type)}" property="og:type" th:content="${global.setting.meta.og.type}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.siteName)}" property="og:site_name" th:content="${global.setting.meta.og.siteName}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.url)}" property="og:url" th:content="${global.setting.meta.og.url}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.title)}" property="og:title" th:content="${global.setting.meta.og.title}"/>
+    <meta th:if="${not #strings.isEmpty(global.setting.meta.og.description)}" property="og:description" th:content="${global.setting.meta.og.description}"/>
+    <link th:if="${not #strings.isEmpty(global.setting.canonical)}" rel="canonical" th:href="${global.setting.canonical}"/>
+    <link th:if="${not #strings.isEmpty(global.setting.author)}" rel="author" th:href="${global.setting.author}"/>
+    <link th:if="${not #strings.isEmpty(global.setting.publisher)}" rel="publisher" th:href="${global.setting.publisher}"/>
+    <link rel="icon" type="image/x-icon" th:href="${global.setting.url.image + '/favicon.ico'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/angular-js/angular-material.min.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/angular-js/angular-scrollbar.min.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-carousel.min.css'}">
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-theme-default.min.css'}">
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/flatpicker.min.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/library.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/global.css'}"/>
+    <link th:each="css : ${global.setting.css}" rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/' + css}"/>
+</head>
+<base th:fragment="global" id="global" th:data-cookie-path="${global.cookie.path}" th:data-cookie-prefix="${global.cookie.prefix}" th:data-datetime-format="${global.dateTime.format}" th:data-datetime-offset="${global.dateTime.offset}" th:data-datetime-timezone="${global.dateTime.timezone}" th:data-audio-url="${global.setting.url.audio}" th:data-base-url="${global.setting.url.base}" th:data-image-url="${global.setting.url.image}" th:data-panel-url="${global.setting.url.panel}" th:data-video-url="${global.setting.url.video}" th:data-website-url="${global.setting.url.website}" th:data-websocket-url="${global.setting.url.websocket}"/>
+<audio th:fragment="notification" id="notification">
+    <source th:src="${global.setting.url.audio + '/notification.mp3'}" type="audio/mpeg">
+</audio>
+<div th:fragment="loading" id="loading" ng-show="loading.view">
+    <div class="wrapper">
+        <div class="circle"></div>
+        <div class="circle-1"></div>
+    </div>
+</div>
+<div th:fragment="response" id="response" ng-show="response.view" ng-class="response.class">
+    <p ng-bind-html="response.message"></p>
+</div>
+<div th:fragment="header" id="header">
+    <div class="logo">
+        <a th:href="${global.setting.url.base}">
+            <h1>
+                <img class="responsive" th:src="${global.setting.url.image + '/logo.png'}" th:alt="${global.setting.name + ' Logo'}"/>
+            </h1>
+        </a>
+    </div>
+    <ul class="menu">
+        <li><a th:href="${global.setting.url.base}">Home</a></li>
+        <li><a th:href="${global.setting.url.base}">Category</a></li>
+        <li><a th:href="${global.setting.url.base}">Model</a></li>
+        <li><a th:href="${global.setting.url.base}">Video</a></li>
+    </ul>
+    <div th:if="${account.id == null}" class="account"></div>
+    <div th:if="${account.id != null}" class="account">
+        <img th:if="${not #strings.isEmpty(account.avatar)}" class="responsive" th:src="${global.setting.url.image + '/user/' + account.avatar}" th:alt="${global.setting.name + ' User Avatar'}"/>
+        <img th:if="${#strings.isEmpty(account.avatar)}" class="responsive" th:src="${global.setting.url.image + '/user/user-picture.png'}" th:alt="${global.setting.name + ' User Avatar'}"/>
+        <p th:if="${#strings.isEmpty(account.name.middle) && #strings.isEmpty(account.name.last)}" th:text="${account.name.first}"></p>
+        <p th:if="${not #strings.isEmpty(account.name.middle) && #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.middle}"></p>
+        <p th:if="${#strings.isEmpty(account.name.middle) && not #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.last}"></p>
+        <p th:if="${not #strings.isEmpty(account.name.middle) && not #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.middle + ' ' + account.name.last}"></p>
+    </div>
+    <div class="notification">
+        <i class="bell-white square-20"></i>
+        <span></span>
+    </div>
+    <div class="logout" ng-click="logout()">
+        <i class="power-white square-20"></i>
+    </div>
+</div>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="app" ng-controller="global">
+<head th:replace="global/header :: head"></head>
+<base th:replace="global/header :: global"/>
+<audio th:replace="global/header :: notification"></audio>
+<div id="wrapper" ng-controller="dashboard">
+    <div th:replace="global/header :: loading"></div>
+    <div th:replace="global/header :: response"></div>
+    <div id="popup" ng-show="popup.view">
+        <div class="wrapper" ng-show="popup.view">
+            <div class="close">
+                <i class="remove-white square-15" ng-click="closePopup()"></i>
+            </div>
+            <div class="popup scrollbar"></div>
+        </div>
+    </div>
+    <div th:replace="global/header :: header"></div>
+    <div id="content">
+        <div class="wrapper">
+            <div class="slider owl-carousel">
+                <div class="item">
+                    <div class="preview">
+                        <a href="#">
+                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="#">
+                            <p>Video Title</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="preview">
+                        <a href="#">
+                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="#">
+                            <p>Video Title</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="preview">
+                        <a href="#">
+                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="#">
+                            <p>Video Title</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="preview">
+                        <a href="#">
+                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="#">
+                            <p>Video Title</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="preview">
+                        <a href="#">
+                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
+                        </a>
+                    </div>
+                    <div class="title">
+                        <a href="#">
+                            <p>Video Title</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content"></div>
+        </div>
+    </div>
+    <div th:replace="global/footer :: footer"></div>
+</div>
+</body>
+</html>
