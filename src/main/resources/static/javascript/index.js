@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     hide: "fadeOutUp",
                     delayShow: "delay1s"
                 },
-                ".heading-large": {
+                ".heading-big": {
                     show: "fadeInLeft",
                     hide: "fadeOutRight",
                     delayShow: "delay1-5s"
