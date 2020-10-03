@@ -14,72 +14,133 @@
             <div class="popup scrollbar"></div>
         </div>
     </div>
+    <div th:replace="global/header :: top-menu"></div>
     <div th:replace="global/header :: header"></div>
-    <div id="content">
+    <div id="slider">
+        <ul class="anim-slider">
+            <li class="anim-slide">
+                <div class="heading-small">
+                    <h3>Islands</h3>
+                </div>
+                <div class="heading-large">
+                    <h2>Hunter<span>Killer</span></h2>
+                </div>
+                <div class="description">
+                    <p>Find technology or people for digital projects in public sector and Find</p>
+                    <p>an individual specialist develope researcher.</p>
+                </div>
+                <div class="call-to-action">
+                    <a href="#">Read More</a>
+                </div>
+            </li>
+            <!--<nav class="anim-arrows">
+                <span class="anim-arrows-prev"></span>
+                <span class="anim-arrows-next"></span>
+            </nav>-->
+        </ul>
+    </div>
+    <div id="content-preview">
         <div class="wrapper">
-            <div class="slider owl-carousel">
-                <div class="item">
-                    <div class="preview">
-                        <a href="#">
-                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
-                        </a>
+            <div class="latest-release section">
+                <h2>Latest Releases</h2>
+                <div class="latest-release-carousel owl-carousel">
+                    <div>
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="${global.setting.url.image + '/background-slider-1.png'}" th:alt="${global.setting.name + ' Latest Releases Thumbnail'}"/>
+                            </a>
+                        </div>
+                        <div class="label">
+                            <a href="#"><p>New</p></a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="description">
+                            <a href="#">
+                                <h4>Call Of</h4>
+                            </a>
+                            <a href="#">
+                                <p>Lorem ipsum dolor sit</p>
+                            </a>
+                        </div>
                     </div>
-                    <div class="title">
-                        <a href="#">
-                            <p>Video Title</p>
-                        </a>
+                    <div>
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="${global.setting.url.image + '/background-slider-1.png'}" th:alt="${global.setting.name + ' Latest Releases Thumbnail'}"/>
+                            </a>
+                        </div>
+                        <div class="label">
+                            <a href="#"><p>New</p></a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="description">
+                            <a href="#">
+                                <h4>Call Of</h4>
+                            </a>
+                            <a href="#">
+                                <p>Lorem ipsum dolor sit</p>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="preview">
-                        <a href="#">
-                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
-                        </a>
+                    <div>
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="${global.setting.url.image + '/background-slider-1.png'}" th:alt="${global.setting.name + ' Latest Releases Thumbnail'}"/>
+                            </a>
+                        </div>
+                        <div class="label">
+                            <a href="#"><p>New</p></a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="description">
+                            <a href="#">
+                                <h4>Call Of</h4>
+                            </a>
+                            <a href="#">
+                                <p>Lorem ipsum dolor sit</p>
+                            </a>
+                        </div>
                     </div>
-                    <div class="title">
-                        <a href="#">
-                            <p>Video Title</p>
-                        </a>
+                    <div>
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="${global.setting.url.image + '/background-slider-1.png'}" th:alt="${global.setting.name + ' Latest Releases Thumbnail'}"/>
+                            </a>
+                        </div>
+                        <div class="label">
+                            <a href="#"><p>New</p></a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="description">
+                            <a href="#">
+                                <h4>Call Of</h4>
+                            </a>
+                            <a href="#">
+                                <p>Lorem ipsum dolor sit</p>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="preview">
-                        <a href="#">
-                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
-                        </a>
-                    </div>
-                    <div class="title">
-                        <a href="#">
-                            <p>Video Title</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="preview">
-                        <a href="#">
-                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
-                        </a>
-                    </div>
-                    <div class="title">
-                        <a href="#">
-                            <p>Video Title</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="preview">
-                        <a href="#">
-                            <img th:src="${global.setting.url.image + '/internal-server-error.png'}" th:alt="${global.setting.name + ' Slider'}"/>
-                        </a>
-                    </div>
-                    <div class="title">
-                        <a href="#">
-                            <p>Video Title</p>
-                        </a>
+                    <div>
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="${global.setting.url.image + '/background-slider-1.png'}" th:alt="${global.setting.name + ' Latest Releases Thumbnail'}"/>
+                            </a>
+                        </div>
+                        <div class="label">
+                            <a href="#"><p>New</p></a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="description">
+                            <a href="#">
+                                <h4>Call Of</h4>
+                            </a>
+                            <a href="#">
+                                <p>Lorem ipsum dolor sit</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="content"></div>
         </div>
     </div>
     <div th:replace="global/footer :: footer"></div>

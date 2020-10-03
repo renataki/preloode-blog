@@ -26,9 +26,10 @@
     <link rel="icon" type="image/x-icon" th:href="${global.setting.url.image + '/favicon.ico'}"/>
     <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/angular-js/angular-material.min.css'}"/>
     <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/angular-js/angular-scrollbar.min.css'}"/>
-    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-carousel.min.css'}">
-    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-theme-default.min.css'}">
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/jquery/jquery-animate-slider.min.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-carousel.min.css'}"/>
     <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/flatpicker.min.css'}"/>
+    <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/owl-theme-default.min.css'}"/>
     <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/library/library.css'}"/>
     <link rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/global.css'}"/>
     <link th:each="css : ${global.setting.css}" rel="stylesheet" type="text/css" th:href="${global.setting.url.css + '/' + css}"/>
@@ -46,35 +47,97 @@
 <div th:fragment="response" id="response" ng-show="response.view" ng-class="response.class">
     <p ng-bind-html="response.message"></p>
 </div>
+<div th:fragment="top-menu" id="top-menu">
+    <div class="wrapper">
+        <div class="announcement">
+            <div>
+                <p>Exclusive Black Friday ! Time Left</p>
+            </div>
+            <div class="countdown">
+                <p>00</p>
+            </div>
+            <div>
+                <p>Days</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="social-media">
+            <a href="#"><i class="facebook-grey square-15"></i></a>
+            <a href="#"><i class="instagram-grey square-15"></i></a>
+            <a href="#"><i class="tokopedia-grey square-15"></i></a>
+        </div>
+        <div class="contact-us">
+            <a href="#"><i class="envelope-grey square-15"></i></a>
+            <a href="#"><i class="phone-grey square-15"></i></a>
+            <a href="#"><i class="whatsapp-grey square-15"></i></a>
+        </div>
+        <div class="account">
+            <a href="#">
+                <p><i class="user-black square-15"></i></p>
+                <p>Login</p>
+            </a>
+        </div>
+    </div>
+</div>
 <div th:fragment="header" id="header">
-    <div class="logo">
-        <a th:href="${global.setting.url.base}">
-            <h1>
-                <img class="responsive" th:src="${global.setting.url.image + '/logo.png'}" th:alt="${global.setting.name + ' Logo'}"/>
-            </h1>
-        </a>
-    </div>
-    <ul class="menu">
-        <li><a th:href="${global.setting.url.base}">Home</a></li>
-        <li><a th:href="${global.setting.url.base}">Category</a></li>
-        <li><a th:href="${global.setting.url.base}">Model</a></li>
-        <li><a th:href="${global.setting.url.base}">Video</a></li>
-    </ul>
-    <div th:if="${account.id == null}" class="account"></div>
-    <div th:if="${account.id != null}" class="account">
-        <img th:if="${not #strings.isEmpty(account.avatar)}" class="responsive" th:src="${global.setting.url.image + '/user/' + account.avatar}" th:alt="${global.setting.name + ' User Avatar'}"/>
-        <img th:if="${#strings.isEmpty(account.avatar)}" class="responsive" th:src="${global.setting.url.image + '/user/user-picture.png'}" th:alt="${global.setting.name + ' User Avatar'}"/>
-        <p th:if="${#strings.isEmpty(account.name.middle) && #strings.isEmpty(account.name.last)}" th:text="${account.name.first}"></p>
-        <p th:if="${not #strings.isEmpty(account.name.middle) && #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.middle}"></p>
-        <p th:if="${#strings.isEmpty(account.name.middle) && not #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.last}"></p>
-        <p th:if="${not #strings.isEmpty(account.name.middle) && not #strings.isEmpty(account.name.last)}" th:text="${account.name.first + ' ' + account.name.middle + ' ' + account.name.last}"></p>
-    </div>
-    <div class="notification">
-        <i class="bell-white square-20"></i>
-        <span></span>
-    </div>
-    <div class="logout" ng-click="logout()">
-        <i class="power-white square-20"></i>
+    <div class="wrapper">
+        <div class="logo">
+            <a th:href="${global.setting.url.base}">
+                <h1>
+                    <img th:src="${global.setting.url.image + '/logo.png'}" th:alt="${global.setting.name + ' Logo'}"/>
+                </h1>
+            </a>
+        </div>
+        <ul class="menu">
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">Home</a>
+            </li>
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">Category</a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#">Blowjob</a>
+                    </li>
+                    <li>
+                        <a href="#">Office Lady</a>
+                    </li>
+                    <li>
+                        <a href="#">Squirting</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">Star</a>
+            </li>
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">Video</a>
+            </li>
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">About Us</a>
+            </li>
+            <li class="menu-item">
+                <a th:href="${global.setting.url.base}">Contact Us</a>
+            </li>
+        </ul>
+        <ul class="cart">
+            <li>
+                <p><i class="basket-white square-20"></i></p>
+                <p>0</p>
+                <ul class="cart-summary">
+                    <li>
+                        <p>Total :</p>
+                        <p>$0.00</p>
+                    </li>
+                    <li>
+                        <a href="#">Shopping Cart</a>
+                        <a href="#">Checkout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="search">
+            <p><i class="search-yellow square-15"></i></p>
+        </div>
     </div>
 </div>
 </html>

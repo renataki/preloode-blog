@@ -1,12 +1,50 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
 
-    $(".slider").owlCarousel({
+    $(".anim-slider").animateSlider({
         autoplay: true,
-        items: 1,
+        interval: 5000,
+        animations: {
+            0: {
+                ".heading-small": {
+                    show: "fadeInDown",
+                    hide: "fadeOutUp",
+                    delayShow: "delay1s"
+                },
+                ".heading-large": {
+                    show: "fadeInLeft",
+                    hide: "fadeOutRight",
+                    delayShow: "delay1-5s"
+                },
+                ".description": {
+                    show: "fadeInUp",
+                    hide: "fadeOutDown",
+                    delayShow: "delay2s"
+                },
+                ".call-to-action": {
+                    show: "fadeInUp",
+                    hide: "fadeOutDown",
+                    delayShow: "delay2-5s"
+                }
+            }
+        }
+    });
+
+
+    $(".owl-carousel").owlCarousel({
+        dots: false,
         loop: true,
-        margin: 20,
-        nav: true
+        margin: 30,
+        nav: true,
+        navText: ["<i class=\"previous-white square-10\"></i>", "<i class=\"next-white square-10\"></i>"],
+        responsive:{
+            0:{
+                items: 1
+            },
+            600:{
+                items: 3
+            }
+        }
     });
 
 
@@ -14,9 +52,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 window.addEventListener("resize", function(event) {
-
-
-
 
 
 });

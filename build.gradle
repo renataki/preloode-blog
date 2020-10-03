@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'com.squareup.okhttp3:okhttp:4.7.2'
-	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	compile 'org.apache.poi:poi:4.1.2'
 	compile 'org.apache.poi:poi-ooxml:4.1.2'
 	compile 'commons-codec:commons-codec:1.10'

@@ -1,5 +1,5 @@
 /*==================== Custom Font ====================*/
-@font-face {
+/*@font-face {
     font-family : "monserrat";
     font-style : normal;
     font-weight : normal;
@@ -10,7 +10,7 @@
         url("../../font/monserrat.ttf") format("truetype"),
         url("../../font/monserrat.svg#monserrat") format("svg");
 }
-/*@font-face {
+@font-face {
     font-family : "open-sans";
     font-style : normal;
     font-weight : normal;
@@ -20,8 +20,30 @@
         url("../../font/open-sans.woff") format("woff"),
         url("../../font/open-sans.ttf") format("truetype"),
         url("../../font/open-sans.svg#open-sans") format("svg");
+}*/
+@font-face {
+    font-family : "oxanium";
+    font-style : normal;
+    font-weight : normal;
+    src : url("../../font/oxanium.eot");
+    src : url("../../font/oxanium.eot?#iefix") format("embedded-opentype"),
+    url("../../font/oxanium.woff2") format("woff2"),
+    url("../../font/oxanium.woff") format("woff"),
+    url("../../font/oxanium.ttf") format("truetype"),
+    url("../../font/oxanium.svg#oxanium") format("svg");
 }
 @font-face {
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../font/poppins.eot");
+    src: url("../../font/poppins.eot?#iefix") format("embedded-opentype"),
+    url("../../font/poppins.woff2") format("woff2"),
+    url("../../font/poppins.woff") format("woff"),
+    url("../../font/poppins.ttf") format("truetype"),
+    url("../../font/poppins.svg#poppins") format("svg");
+}
+/*@font-face {
     font-family: "poppins-extra-light";
     font-style: normal;
     font-weight: normal;
@@ -31,6 +53,17 @@
     url("../../font/poppins-extra-light.woff") format("woff"),
     url("../../font/poppins-extra-light.ttf") format("truetype"),
     url("../../font/poppins-extra-light.svg#poppins-extra-light") format("svg");
+}
+@font-face {
+    font-family: "poppins-semi-bold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../font/poppins-semi-bold.eot");
+    src: url("../../font/poppins-semi-bold.eot?#iefix") format("embedded-opentype"),
+    url("../../font/poppins-semi-bold.woff2") format("woff2"),
+    url("../../font/poppins-semi-bold.woff") format("woff"),
+    url("../../font/poppins-semi-bold.ttf") format("truetype"),
+    url("../../font/poppins-semi-bold.svg#poppins-semi-bold") format("svg");
 }
 @font-face {
     font-family: "roboto-light";
@@ -210,6 +243,10 @@ i.bank-white {
     background: url("../../image/library/icon/bank-icon-white.png") center no-repeat;
 }
 
+i.basket-white {
+    background: url("../../image/library/icon/basket-icon-white.png") center no-repeat;
+}
+
 i.bell-white {
     background: url("../../image/library/icon/bell-icon-white.png") center no-repeat;
 }
@@ -262,6 +299,10 @@ i.down-white {
     background: url("../../image/library/icon/down-icon-white.png") center no-repeat;
 }
 
+i.envelope-grey {
+    background: url("../../image/library/icon/envelope-icon-grey.png") center no-repeat;
+}
+
 i.equalizer-black {
     background: url("../../image/library/icon/equalizer-icon-black.png") center no-repeat;
 }
@@ -276,6 +317,10 @@ i.exchange-white {
 
 i.facebook-black {
     background: url("../../image/library/icon/facebook-icon-black.png") center no-repeat;
+}
+
+i.facebook-grey {
+    background: url("../../image/library/icon/facebook-icon-grey.png") center no-repeat;
 }
 
 i.facebook-white {
@@ -326,6 +371,10 @@ i.instagram-black {
     background: url("../../image/library/icon/instagram-icon-black.png") center no-repeat;
 }
 
+i.instagram-grey {
+    background: url("../../image/library/icon/instagram-icon-grey.png") center no-repeat;
+}
+
 i.instagram-white {
     background: url("../../image/library/icon/instagram-icon-white.png") center no-repeat;
 }
@@ -374,8 +423,16 @@ i.next-white {
     background: url("../../image/library/icon/next-icon-white.png") center no-repeat;
 }
 
+i.next-yellow {
+    background: url("../../image/library/icon/next-icon-yellow.png") center no-repeat;
+}
+
 i.pencil-white {
     background: url("../../image/library/icon/pencil-icon-white.png") center no-repeat;
+}
+
+i.phone-grey {
+    background: url("../../image/library/icon/phone-icon-grey.png") center no-repeat;
 }
 
 i.phone-white {
@@ -408,6 +465,10 @@ i.previous-black {
 
 i.previous-white {
     background: url("../../image/library/icon/previous-icon-white.png") center no-repeat;
+}
+
+i.previous-yellow {
+    background: url("../../image/library/icon/previous-icon-yellow.png") center no-repeat;
 }
 
 i.promotion-white {
@@ -452,6 +513,10 @@ i.search-black {
 
 i.search-white {
     background: url("../../image/library/icon/search-icon-white.png") center no-repeat;
+}
+
+i.search-yellow {
+    background: url("../../image/library/icon/search-icon-yellow.png") center no-repeat;
 }
 
 i.setting-white {
@@ -506,6 +571,10 @@ i.tokopedia-black {
     background: url("../../image/library/icon/tokopedia-icon-black.png") center no-repeat;
 }
 
+i.tokopedia-grey {
+    background: url("../../image/library/icon/tokopedia-icon-grey.png") center no-repeat;
+}
+
 i.tokopedia-white {
     background: url("../../image/library/icon/tokopedia-icon-white.png") center no-repeat;
 }
@@ -532,6 +601,10 @@ i.user-white {
 
 i.view-white {
     background: url("../../image/library/icon/view-icon-white.png") center no-repeat;
+}
+
+i.whatsapp-grey {
+    background: url("../../image/library/icon/whatsapp-icon-grey.png") center no-repeat;
 }
 
 i.margin-left-5 {
